@@ -1,0 +1,756 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /*font-family: Arial;*/
+  /*margin: 0 auto; */
+  /*max-width: 800px; */
+  /*padding: 20px;*/
+}
+
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+#demo .fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top:10px;
+}
+
+.middle {
+  margin-top:10px;
+  float: left;
+  width: 70%;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+.row{
+    /*background-color:#fff;*/
+    padding:20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.bar-5 {height: 18px; background-color: #4CAF50;}
+.bar-4 {height: 18px; background-color: #2196F3;}
+.bar-3 {height: 18px; background-color: #00bcd4;}
+.bar-2 {height: 18px; background-color: #ff9800;}
+.bar-1 {height: 18px; background-color: #f44336;}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  .right {
+    display: none;
+  }
+}
+
+.card{
+    border-radius:15px;
+}
+  .features ul {
+  font-size: 15px;
+  line-height: 2em;
+  margin: 5px 0 15px;
+  padding: 0;
+}
+.features ul li {
+  list-style: none;
+  position: relative;
+  padding: 0 0 0 20px;
+}
+
+.features ul.square li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+}
+
+.features ul.round li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+.features ul.triangle li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid #4caf50;
+}
+
+.features ul.arrow li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  height: 5px;
+  width: 5px;
+  border: 1px solid #4caf50;
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg);
+}
+
+.features ul.line li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  display: block;
+  border-top: 2px solid #4caf50;
+}
+
+.features ul.plus li::before {
+  content: "";
+  position: absolute;
+  background: #4caf50;
+  left: 0;
+  top: 9px;
+  height: 2px;
+  width: 8px;
+}
+.features ul.plus li::after {
+  content: "";
+  position: absolute;
+  background: #4caf50;
+  left: 3px;
+  top: 5px;
+  height: 10px;
+  width: 2px;
+}
+
+.features ul.diamond li::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-bottom-color: #4caf50;
+}
+.features ul.diamond li::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-top-color: #4caf50;
+}
+
+.features ul.pac-man li::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 5px;
+  width: 0px;
+  height: 0px;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #4caf50;
+  border-left: 5px solid #4caf50;
+  border-bottom: 5px solid #4caf50;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.features ul.checkmark li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 5px;
+  width: 3px;
+  height: 6px;
+  border: solid #4caf50;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.features ul.circle-checkmark li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  border: solid 8px #4caf50;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+}
+.features ul.circle-checkmark li::after {
+  content: "";
+  position: absolute;
+  left: .32%;
+  top: 5px;
+  width: 3px;
+  height: 6px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.features ul.burst li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  background: #4caf50;
+  width: 10px;
+  height: 10px;
+  text-align: center;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.features ul.burst li::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 10px;
+  width: 10px;
+  background: #4caf50;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.features ul.heart li::before, .features ul.heart li::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 5px;
+  width: 7px;
+  height: 12px;
+  background: #4caf50;
+  -moz-border-radius: 50px 50px 0 0;
+  border-radius: 50px 50px 0 0;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform-origin: 0 100%;
+  -moz-transform-origin: 0 100%;
+  -ms-transform-origin: 0 100%;
+  -o-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+.features ul.heart li::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transform-origin: 100% 100%;
+  -moz-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  -o-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+}
+
+.features ul.x li::before {
+  content: '';
+  position: absolute;
+  height: 15px;
+  border-left: 2px solid #f60;
+  transform: rotate(45deg);
+  top: 2px;
+  left: 5px;
+}
+.features ul.x li::after {
+  content: '';
+  position: absolute;
+  height: 15px;
+  border-left: 2px solid #f60;
+  transform: rotate(-45deg);
+  top: 2px;
+  left: 5px;
+}
+
+.features ul.outline-round li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border: 2px solid #4caf50;
+}
+
+.features ul.curved-round li::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 4px;
+  top: 3px;
+  border-top: 9px solid transparent;
+  border-right: 9px solid #4caf50;
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -ms-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+}
+.features ul.curved-round li::after {
+  content: '';
+  position: absolute;
+  border: 0 solid transparent;
+  border-top: 3px solid #4caf50;
+  border-radius: 20px 0 0 0;
+  top: 0;
+  left: -5px;
+  width: 12px;
+  height: 12px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+
+/*.footer {*/
+/*   position: fixed;*/
+/*   left: 0;*/
+/*   bottom: 0;*/
+/*   width: 100%;*/
+/*   background-color: #21D4FD;*/
+/*   background-image: linear-gradient(19deg,#2174ff 0%, #21D4FD 100%);*/
+/*   color:#fff;*/
+/*   text-align: center;*/
+/*   z-index:2000;*/
+/*}*/
+/*.footer a{*/
+/*    color:#155724;*/
+/*}*/
+/*.footer p{*/
+/*    padding-top:8px;*/
+/*    padding-bottom:8px;*/
+/*}*/
+
+</style>
+<script>
+    drawImage = async img_path => {
+  let canvas = document.createElement("canvas");
+  canvas.src = img_path;
+  const context = canvas.getContext("2d");
+
+  const img = await loadImage(img_path);
+  canvas.width = img.width;
+  canvas.height = img.height;
+  context.drawImage(img, 0, 0);
+
+  return { canvas, context };
+};
+
+function loadImage(img_path) {
+  return new Promise(r => {
+    let i = new Image();
+
+    i.onload = () => r(i);
+    i.src = img_path;
+  });
+}
+
+calculateResult = (canvas, context) => {
+  let store = {};
+  const imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+  const data = imgData.data;
+
+  const total_pixels = canvas.width * canvas.height;
+  const coverage = total_pixels / 4;
+
+  const max_pixel_index = total_pixels - 1;
+
+  for (let i = 0; i < coverage; ++i) {
+    const x = getPixelIndex(Math.floor(Math.random() * max_pixel_index));
+    const key = `${data[x]},${data[x + 1]},${data[x + 2]}`;
+    const val = store[key];
+    store[key] = val ? val + 1 : 1;
+  }
+
+  const rgb_code = Object.keys(store).reduce((a, b) =>
+    store[a] > store[b] ? a : b
+  );
+
+  return `rgb(${rgb_code})`;
+};
+
+function getPixelIndex(numToRound) {
+  //Each pixel is 4 units long: r,g,b,a
+  const remainder = numToRound % 4;
+  if (remainder == 0) return numToRound;
+  return numToRound + 4 - remainder;
+}
+
+</script>
+</head>
+  <div class="page-header header-filter" data-parallax="false" style="background-image: url('/static/img/apps.jpg')">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="title">Add To HomeScreen</h1>
+           <h4>Get all your favourite Progressive Web Apps all in one place. Welcome to Your HomeScreen.</h4>
+          <br>
+          <!-- <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn btn-danger btn-raised btn-lg">
+            <i class="fa fa-play"></i> Watch video
+          </a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="testimonials-2 section-dark">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div id="carouselExampleIndicatorss" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for img in object.images.all %}
+                    {% if forloop.first %}
+                  <div class="carousel-item active">
+                    <div class="card card-testimonial card-plain">
+                      <!--<div class="card-avatar">-->
+                      <!--  <a href="#pablo">-->
+                      <!--    <img class="img" src="assets/img/faces/kendall.jpg">-->
+                      <!--  </a>-->
+                      <!--</div>-->
+                      <div class="card-body">
+                          <div class="card-header card-header-image">
+                            <img class="img" src="{{img.image.url}}">
+                          </div>
+
+                        <!--<h5 class="card-description">"I speak yell scream directly at the old guard on behalf of the future. I gotta say at that time I’d like to meet Kanye I speak yell scream directly at the old guard on behalf of the future. My brother Chance!!!-->
+                        <!--  <br>Thank you for letting me work on this masterpiece. One of my favorite people."-->
+                        <!--</h5>-->
+                        <!--<h4 class="card-title">Kendall Thompson</h4>-->
+                        <!--<h6 class="card-category text-muted">CEO @ Marketing Digital Ltd.</h6>-->
+                        <!--<div class="footer">-->
+                        <!--  <i class="material-icons text-warning">star</i>-->
+                        <!--  <i class="material-icons text-warning">star</i>-->
+                        <!--  <i class="material-icons text-warning">star</i>-->
+                        <!--  <i class="material-icons text-warning">star</i>-->
+                        <!--  <i class="material-icons text-warning">star</i>-->
+                        <!--</div>-->
+                      </div>
+                    </div>
+                  </div>
+                  {% else %}
+                  <div class="carousel-item">
+                    <div class="card card-testimonial card-plain">
+                      <!--<div class="card-avatar">-->
+                      <!--  <a href="#pablo">-->
+                      <!--    <img class="img" src="assets/img/faces/christian.jpg">-->
+                      <!--  </a>-->
+                      <!--</div>-->
+                      <div class="card-body">
+                          <div class="card-header card-header-image">
+                            <img class="img" src="{{img.image.url}}">
+                          </div>
+                        <!--<h5 class="card-description">"Thank you Anna for the invite thank you to the whole Vogue team Called I Miss the Old Kanye At the God's last game Chop up the soul Kanye. I promise I will never let the people down. I want a better life for all!!! Pablo Pablo Pablo Pablo! Thank you Anna for the invite thank you to the whole Vogue team."-->
+                        <!--</h5>-->
+                        <!--<h4 class="card-title">Christian Louboutin</h4>-->
+                        <!--<h6 class="card-category text-muted">Designer @ Louboutin &amp; Co.</h6>-->
+                        <!--<div class="footer">-->
+                        <!--  <i class="material-icons text-warning">star</i>-->
+                        <!--  <i class="material-icons text-warning">star</i>-->
+                        <!--  <i class="material-icons text-warning">star</i>-->
+                        <!--  <i class="material-icons text-warning">star</i>-->
+                        <!--</div>-->
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicatorss" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon info" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicatorss" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 ml-auto" style="margin:auto;">
+    <a class="btn btn-info" target="_" href="{{object.url}}"><i class="material-icons">add</i> Add To Screen</a>
+</div>
+
+<div id="page" style="margin:20px;">
+    {% if rates %}
+<span class="heading">User Rating</span>
+<span id="demo"></span>
+
+<p>{{overall_rating}} average based on {{no_of_users}} review(s).</p>
+{% endif %}
+<!--<div class="features">-->
+<!--    <span class="heading">New Features</span>-->
+<!--    <ul class="burst">-->
+<!--        <li>-->
+<!--            Search for drugs while offline.-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            Call pharmacies if you don't get your drug after searching.-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            Health tips that keep you updated-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+<!--<hr style="border:3px solid #185dd4">-->
+{% if rates %}
+<div class="container">
+<div class="row" style="background-color:#fff;">
+  <div class="side">
+    <div>5 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-5" style="width:{{bar5}}%"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{bar5count}}</div>
+  </div>
+  <div class="side">
+    <div>4 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-4" style="width:{{bar4}}%"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{bar4count}}</div>
+  </div>
+  <div class="side">
+    <div>3 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-3" style="width:{{bar3}}%"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{bar3count}}</div>
+  </div>
+  <div class="side">
+    <div>2 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-2" style="width:{{bar2}}%"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{bar2count}}</div>
+  </div>
+  <div class="side">
+    <div>1 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-1" style="width:{{bar1}}%"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{bar1count}}</div>
+  </div>
+</div>
+</div>
+{% endif %}
+<br/>
+<div class="container">
+    <h3>User Ratings and Reviews</h3>
+    {% for each in users %}
+    <div class="card col-sm-12 col-md-12 col-lg-12 shadow" style="padding:20px;">
+        <p><span style="float:left;" id="{{each.user.username}}">
+            <script>
+            var user_rating = "{{each.rating}}";
+            var con_user_rating = parseInt(user_rating)
+                for (i = 1; i < 6; i++) {
+                if(i <= con_user_rating){
+                     userspan = document.getElementById("{{each.user.username}}");
+                     userspan.innerHTML += `<span class="fa fa-star checked"></span>`
+                }else{
+                   userspan.innerHTML += `<span class="fa fa-star"></span>`
+                }
+                }
+            </script>
+        </span>
+            <span style="float:right;">
+                {% if each.user.user_img %}
+                <img id="usrimg" src="{{each.user.user_img.url}}" style="border:solid 2px orange;border-radius:50%;height:50px;width:50px;">
+                <script>
+                main = async () => {
+                const { canvas, context } = await drawImage("{{each.user.user_img.url}}");
+                const result = await calculateResult(canvas, context);
+                document.getElementById('usrimg').style.borderColor = result;
+                };
+                main();
+                </script>
+                {% else %}
+                <img src="/static/img/apps.jpg" style="border:solid 2px orange;border-radius:50%;height:50px;width:50px;">
+                {% endif %}
+            </span>
+        </p>
+        <p>App User: {{each.user.username}}</p>
+        <p>Rating: {{each.rating}}</p>
+        {% if each.review %}
+        <p>Review: {{each.review}}</p>
+        {% endif %}
+        <p>Reviewed on: {{each.date_time}}</p>
+        {% if each.no_of_replies > 0 %}
+        <a id="btn{{each.id}}" class="btn btn-lighter shadow col-sm-2 col-md-2 col-lg-2" data-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
+            {% if each.no_of_replies > 1 %}
+            {{each.no_of_replies}} Replies <i class="fa fa-arrow-down"></i>
+            {% else %}
+            {{each.no_of_replies}} Reply <i class="fa fa-arrow-down"></i>
+            {% endif %}
+        </a>
+        <br/>
+        {% endif %}
+        {% for reply in each.replies.all %}
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            {% if reply.user.is_superuser %}
+            <p>{{reply.user.username}} from <a href="https://pywe.org" style="color:blue;">PywE</a></p>
+            {% else %}
+            <p>Comment</p>
+            {%endif %}
+            <p>{{reply.content}}</p>
+            <p style="font-size:12px;">{{reply.reply_date}}</p>
+          </div>
+        </div>
+        {% endfor %}
+
+        {% if user.is_superuser and user != each.user %}
+        <br/>
+        <div style="float:right;">
+        <a href="#" onclick="popReply('{{each.id}}','Please carefully reply the user','{{each.content}}')" class="btn btn-success shadow col-sm-2 col-md-2 col-lg-2 pull-right" id="replyBtn" data-toggle="modal" data-target="#replyModal">Reply</a>
+        </div>
+        {% endif %}
+        {% if not user.is_superuser %}
+        {% if user.username == each.user.username %}
+        <br/>
+        <div style="float:right;">
+        <a href="#" onclick="popReply('{{each.id}}','Comment on Your Review','{{each.content}}')" class="btn btn-success shadow col-sm-2 col-md-2 col-lg-2 pull-right" id="replyBtn" data-toggle="modal" data-target="#replyModal">Comment</a>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+    <br/>
+    <br/>
+    {% empty %}
+    <div class="card col-sm-12 col-md-12 col-lg-12 shadow" style="padding:20px;">
+       <p>No Review Yet</p>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<!--<div class="footer">-->
+<!--  <p>© Copyright PywE 2019. <a href="https://www.pywe.org">PywE</a></p>-->
+<!--</div>-->
+<script>
+
+rates = document.getElementById("demo")
+var ratesfromview = "{{rates}}"
+var rateslist = ratesfromview.split(",")
+for (i = 0; i < rateslist.length; i++) {
+    if (rateslist[i] === "1"){
+        rates.innerHTML += `<span class="fa fa-star checked"></span>`
+    }else if(rateslist[i] === "0.5"){
+        rates.innerHTML += `<span class="fa fa-star-half-full checked"></span>`
+    }
+    else{
+        rates.innerHTML += `<span class="fa fa-star"></span>`
+    }
+}
+
+
+function popReply(id,msg,content){
+// console.log(id)
+var frm = document.getElementById('replyForm') || null;
+var warning = document.getElementById('warning') || null;
+var c = document.getElementById('c') || null;
+c.innerHTML = content;
+warning.innerHTML = msg;
+frm.action = "/reply/"+id+"/"
+}
+
+
+</script>
+{% endblock content %}

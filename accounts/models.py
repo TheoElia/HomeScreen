@@ -8,5 +8,5 @@ class CustomUser(AbstractUser):
     # add additional fields in here
     email = models.EmailField(null=True,blank=True)
     is_staff = models.BooleanField(default=True)
+    user_img = models.FileField(upload_to="static/images/profiles",null=True,blank=True)
 
-    
